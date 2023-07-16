@@ -6,7 +6,7 @@ const conversationSchema = new Schema({
         required: true,
         unique: true,
     },
-    partcipants: [{
+    participants: [{
         type: String,
         ref: 'User',
     }],
