@@ -1,24 +1,29 @@
 import "./App.css";
-import React, { useState } from "react";
-import { Login } from "./components/Login";
-import { Signup } from "./components/Signup";
+import React from "react";
+import { Register } from './components/Register';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+
+
+const client = new ApolloClient ({
+  uri: '/graphql' ,
+  cache: new InMemoryCache(),
+});
 
 function App() {
-  const [currentForm, setCurrentForm] = useState("login");
-
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  };
   return (
-    <div>
-      hello
-      {currentForm === "login" ? (
-        <Login onFormSwitch={toggleForm} />
-      ) : (
-        <Signup onFormSwitch={toggleForm} />
-      )}
-    </div>
-  );
+    <ApolloProvider client ={ client}>
+      <Router>
+        <div>
+          <Routes>
+            <Route path='/' element={<Home />}/>
+            <Route path='/register' element={<Register />}/>
+            <Route path='*' element={<NotFound />}/>
+          </Routes>
+        </div>
+      </Router>
+    </ApolloProvider>
+  )
 }
 
 export default App;
