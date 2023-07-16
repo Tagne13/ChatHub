@@ -11,6 +11,7 @@ function App() {
   };
   return (
     <div>
+      hello
       {currentForm === "login" ? (
         <Login onFormSwitch={toggleForm} />
       ) : (
