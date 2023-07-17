@@ -2,8 +2,8 @@ import React from "react";
 import { Login } from "./Registration/Login";
 import { Signup } from "./Registration/Signup";
 
-export default function Register(){
-    const [currentForm, setCurrentForm] = useState("login");
+const Register = () => {
+  const [currentForm, setCurrentForm] = useState("login");
 
   const toggleForm = (formName) => {
     setCurrentForm(formName);
@@ -17,5 +17,6 @@ export default function Register(){
       )}
     </div>
   );
+};
 
-}
+export default Register;
