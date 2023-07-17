@@ -16,9 +16,9 @@ function App() {
       <Router>
         <div>
           <Routes>
-            <Route path='/' element={<Home />}/>
+            {/* <Route path='/' element={<Home />}/> */}
             <Route path='/register' element={<Register />}/>
-            <Route path='*' element={<NotFound />}/>
+            {/* <Route path='*' element={<NotFound />}/> */}
           </Routes>
         </div>
       </Router>
