@@ -1,6 +1,6 @@
 import React from "react";
-import { Login } from "./Register/Login";
-import { Signup } from "./Register/Signup";
+import { Login } from "./Registration/Login";
+import { Signup } from "./Registration/Signup";
 
 export default function Register(){
     const [currentForm, setCurrentForm] = useState("login");
