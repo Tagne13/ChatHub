@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Login } from "./home/Login";
-import { Signup } from "./home/Signup";
+import  Login  from "./home/Login";
+import  Signup  from "./home/Signup";
 
-export default function Register() {
+const Home = () => {
   const [currentForm, setCurrentForm] = useState("login");
 
   const toggleForm = (formName) => {
@@ -18,3 +18,5 @@ export default function Register() {
     </div>
   );
 }
+
+export default Home;

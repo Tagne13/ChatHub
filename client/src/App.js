@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
-import Register from './components/Register';
+import Home from './components/Home';
+import NotFound from "./components/NotFound"
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
@@ -15,9 +16,8 @@ function App() {
       <Router>
         <div>
           <Routes>
-            {/* <Route path='/' element={<Home />}/> */}
-            <Route path='/register' element={<Register />}/>
-            {/* <Route path='*' element={<NotFound />}/> */}
+            <Route path='/' element={<Home />}/>
+            <Route path='*' element={<NotFound />}/>
           </Routes>
         </div>
       </Router>
