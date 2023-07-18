@@ -12,16 +12,24 @@ export default function Messages() {
   const [
     addMessage,
     { data: dataMutation, loading: loadingMutation, error: errorMutation },
-  ] = useMutation(ADD_MESSAGE);
+  ] = useMutation(ADD_MESSAGE, {
+    refetchQueries: [{query: GET_MESSAGES}],
+    onCompleted: () => {
+      setNewMessage("")
+    },
+    onError: (error) =>{
+      console.error("Error adding message:", error);
+    }
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (condition) {
+    if (newMessage.trim() !== "") {
       addMessage({
         variables: {
           content: newMessage,
           sender: data.sender._id,
-          //   conversation: pull from route
+          //   conversation: pull from route or hard code with the room ID.
         },
       });
     }
@@ -30,13 +38,14 @@ export default function Messages() {
   return (
     <>
       <div>{data}</div>
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* <label></label> */}
         <input
           type="text"
           value={newMessage}
           onChange={(event) => setNewMessage(event.target.value)}
         ></input>
+        <button type="submit">Send</button>
       </form>
     </>
   );
