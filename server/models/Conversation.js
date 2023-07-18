@@ -7,7 +7,7 @@ const conversationSchema = new Schema({
         unique: true,
     },
     participants: [{
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: 'User',
     }],
     messages: [{
