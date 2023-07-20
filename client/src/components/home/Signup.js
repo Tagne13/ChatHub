@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../../utils/mutations';
-import Auth from '../../utils/auth';
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../../utils/mutations";
+import Auth from "../../utils/auth";
 
 const Signup = (props) => {
   // Set initial form state
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
+  const [userFormData, setUserFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   // Set state for form validation
   const [validated] = useState(false);
   // Set state for alert
-  const [showAlert, setShowAlert] = useState(false);
+  const [helper, setHelper] = useState("");
 
   const [createUser, { error }] = useMutation(ADD_USER);
-
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
-  }, [error]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -30,35 +26,44 @@ const Signup = (props) => {
     event.preventDefault();
 
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+    if (userFormData.password.length >= 8) {
+      console.log("Here Valid password");
+    } else {
+      setHelper("invalid email or password");
+      return;
+    }
+
+    if (userFormData.email) {
+      //regex
+      console.log("Here Valid password");
+    } else {
+      setHelper("invalid email or password");
+      return;
     }
 
     try {
       const { data } = await createUser({
-        variables: { ...userFormData }
+        variables: { ...userFormData },
       });
 
       Auth.login(data.createUser.token);
     } catch (err) {
       console.error(err);
-    };
+      setHelper("User not found or incorrect credentials");
+      console.log(helper);
+    }
 
     setUserFormData({
-      username: '',
-      email: '',
-      password: '',
+      username: "",
+      email: "",
+      password: "",
     });
   };
 
   return (
     <>
-      <form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
-        </alert>
-        <label htmlfor="username">Username</label>
+      <form onSubmit={handleFormSubmit}>
+        <label htmlFor="username">Username</label>
         <input
           value={userFormData.username}
           onChange={handleInputChange}
@@ -68,7 +73,7 @@ const Signup = (props) => {
           name="username"
           required
         />
-        <label htmlfor="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input
           value={userFormData.email}
           onChange={handleInputChange}
@@ -78,7 +83,7 @@ const Signup = (props) => {
           name="email"
           required
         />
-        <label htmlfor="password">Password</label>
+        <label htmlFor="password">Password</label>
         <input
           value={userFormData.password}
           onChange={handleInputChange}
@@ -88,7 +93,7 @@ const Signup = (props) => {
           name="password"
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">Sign Up!</button>
       </form>
 
       <button onClick={() => props.onFormSwitch("login")}>
