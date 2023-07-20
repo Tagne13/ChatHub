@@ -31,6 +31,14 @@ const typeDefs = gql`
     user: User!
   }
 
+  type CheckoutSession {
+    session: ID
+  }
+
+  input CheckoutInput {
+    amount: Float!
+  }
+
   type Query {
     getUser(_id: ID!): User
     getConversation(_id: ID!): Conversation
@@ -42,12 +50,17 @@ const typeDefs = gql`
     updateUser(username: String, email: String, password: String): User
     deleteUser(_id: ID!): User
     createConversation(name: String!, participants: [ID!]!): Conversation
-    updateConversation(_id: ID!, name: String, participants: [ID!]): Conversation
+    updateConversation(
+      _id: ID!
+      name: String
+      participants: [ID!]
+    ): Conversation
     deleteConversation(_id: ID!): Conversation
     addUserToConversation(_id: ID!, user: ID!): Conversation
     removeUserFromConversation(_id: ID!, user: ID!): Conversation
     createMessage(content: String!, sender: ID!, conversation: ID!): Message
     login(email: String!, password: String!): Auth
+    checkout(input: CheckoutInput!): CheckoutSession
   }
 
   schema {
