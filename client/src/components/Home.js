@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import  Login  from "./home/Login";
-import  Signup  from "./home/Signup";
+import Login from "./home/Login";
+import Signup from "./home/Signup";
 
-const Home = () => {
+function Home() {
   const [currentForm, setCurrentForm] = useState("login");
 
   const toggleForm = (formName) => {
