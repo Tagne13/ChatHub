@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
-const Login = (props) => {
+function Login(props) {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
-  const [validated, setValidated] = useState(false);
   const [helper, setHelper] = useState("");
 
   const [login, { error }] = useMutation(LOGIN_USER);
@@ -40,6 +40,7 @@ const Login = (props) => {
       console.log(response);
 
       Auth.login(response.data.login.token);
+      window.location.assign("/conversation");
     } catch (err) {
       console.error(err);
       setHelper("User not found or incorrect credentials");
@@ -84,6 +85,6 @@ const Login = (props) => {
       </button>
     </>
   );
-};
+}
 
 export default Login;

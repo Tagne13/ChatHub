@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { GET_MESSAGES } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
-export default function Messages() {
+function Messages() {
   const { loading, data, error } = useQuery(GET_MESSAGES, {
-    variables: { conversationId },
+    // variables: { conversationId },
     // Think we will have to hard code this conversationID, since we will only have one.
   });
 
@@ -30,3 +30,5 @@ export default function Messages() {
     </>
   );
 }
+
+export default Messages;

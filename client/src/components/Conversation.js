@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Messages from "./Conversation/Messages";
 import MessageInput from "./Conversation/MessageInput";
 import Navbar from "./Conversation/Navbar";
 
-export default function Conversation() {
+// Query the conversation.
+
+function Conversation() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Messages />
       <MessageInput />
     </>
   );
 }
+
+export default Conversation;

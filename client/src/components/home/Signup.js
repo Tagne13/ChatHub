@@ -10,8 +10,6 @@ const Signup = (props) => {
     email: "",
     password: "",
   });
-  // Set state for form validation
-  const [validated] = useState(false);
   // Set state for alert
   const [helper, setHelper] = useState("");
 
@@ -47,6 +45,7 @@ const Signup = (props) => {
       });
 
       Auth.login(data.createUser.token);
+      window.location.assign("/conversation");
     } catch (err) {
       console.error(err);
       setHelper("User not found or incorrect credentials");
