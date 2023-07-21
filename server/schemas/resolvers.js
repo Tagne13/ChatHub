@@ -1,12 +1,12 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User, Conversation, Message } = require('../models');
-const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
+const { User, Conversation, Message } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     getUser: async (parent, { _id }) => {
       try {
-        const user = await User.findById(_id).populate('messages');
+        const user = await User.findById(_id).populate("messages");
         return user;
       } catch (err) {
         throw new Error("Couldn't find user with this id!");
@@ -14,15 +14,20 @@ const resolvers = {
     },
     getConversation: async (parent, { _id }) => {
       try {
-        const conversation = await Conversation.findById(_id).populate('participants');
+        const conversation = await Conversation.findById(_id).populate(
+          "participants"
+        );
         return conversation;
       } catch (err) {
-        throw new Error("Couldn't find conversation with this id!");
+        // throw new Error("Couldn't find conversation with this id!");
+        return err;
       }
     },
     getMessages: async (parent, { conversation }) => {
       try {
-        const messages = await Message.find({ conversation }).populate('sender');
+        const messages = await Message.find({ conversation }).populate(
+          "sender"
+        );
         return messages;
       } catch (err) {
         throw new Error("Couldn't find messages for this conversation!");
@@ -38,50 +43,63 @@ const resolvers = {
     }, //done
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     }, //not MVP
     deleteUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findOneAndDelete({ _id: context.user._id });
       }
 
-      throw new AuthenticationError('Not logged in');
-    }, //not MVP 
+      throw new AuthenticationError("Not logged in");
+    }, //not MVP
     createConversation: async (parent, args, context) => {
       if (context.user) {
-      const conversation = await Conversation.create(args);
-
-      return conversation;
+        const conversation = await Conversation.create(args);
+        return args;
+        await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { conversations: conversation } },
+          { new: true }
+        );
+        return conversation;
       }
-      throw new AuthenticationError('User is not logged in');
+      throw new AuthenticationError("User is not logged in");
     }, //priority, need front end functionality to see the user interaction
     updateConversation: async (parent, args, context) => {
       if (context.user) {
-        return await Conversation.findByIdAndUpdate(context.user._id, args, { new: true });
+        return await Conversation.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
       }
 
-      throw new AuthenticationError('User is not logged in');
+      throw new AuthenticationError("User is not logged in");
     }, //not MVP
     deleteConversation: async (parent, args, context) => {
       if (context.user) {
         return await Conversation.findOneAndDelete({ _id: context.user._id });
       }
 
-      throw new AuthenticationError('User is not logged in');
+      throw new AuthenticationError("User is not logged in");
     }, //maybe
-    addUserToConversation: async (parent, { userId, conversation }, context) => {
+    addUserToConversation: async (
+      parent,
+      { userId, conversation },
+      context
+    ) => {
       if (context.user) {
         return await User.findOneAndUpdate(
           { _id: userId },
           { $addToSet: { conversations: conversation } },
           { new: true }
-        )
+        );
       }
 
-      throw new AuthenticationError('User is not logged in');
+      throw new AuthenticationError("User is not logged in");
     }, // priority, however how does this work with socket? SocketIO problem
     removeUserFromConversation: async (parent, { conversation }, context) => {
       if (context.user) {
@@ -89,14 +107,26 @@ const resolvers = {
           { _id: context.user._id },
           { $pull: { conversations: conversation } },
           { new: true }
-        )
+        );
       }
 
-      throw new AuthenticationError('User is not logged in')
+      throw new AuthenticationError("User is not logged in");
     }, // priority, also involves socketIO
     createMessage: async (parent, args, context) => {
       if (context.user) {
         const message = await Message.create(args);
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { conversations: conversation } },
+          { new: true }
+        );
+
+        await Conversation.findOneAndUpdate(
+          { _id: "64b9e4c3a275f5bedc3f5167" },
+          { $addToSet: { messages: message } },
+          { new: true }
+        );
 
         return message;
       }
@@ -105,20 +135,20 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('Incorrect email/password');
+        throw new AuthenticationError("Incorrect email/password");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect password');
+        throw new AuthenticationError("Incorrect password");
       }
 
       const token = signToken(user);
 
       return { token, user };
-    } // done
-  }
+    }, // done
+  },
 };
 
 module.exports = resolvers;

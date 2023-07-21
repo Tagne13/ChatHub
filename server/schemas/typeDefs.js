@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -42,7 +42,11 @@ const typeDefs = gql`
     updateUser(username: String, email: String, password: String): User
     deleteUser(_id: ID!): User
     createConversation(name: String!, participants: [ID!]!): Conversation
-    updateConversation(_id: ID!, name: String, participants: [ID!]): Conversation
+    updateConversation(
+      _id: ID!
+      name: String
+      participants: [ID!]
+    ): Conversation
     deleteConversation(_id: ID!): Conversation
     addUserToConversation(_id: ID!, user: ID!): Conversation
     removeUserFromConversation(_id: ID!, user: ID!): Conversation
