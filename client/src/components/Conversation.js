@@ -1,7 +1,7 @@
 import React from "react";
-import Messages from "./conversation/Messages";
-import MessageInput from "./conversation/MessageInput";
-import Navbar from "./conversation/Navbar";
+import Messages from "./Conversation/Messages";
+import MessageInput from "./Conversation/MessageInput";
+import Navbar from "./Conversation/Navbar";
 
 // Query the conversation.
 

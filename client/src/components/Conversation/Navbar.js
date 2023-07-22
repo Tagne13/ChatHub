@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <a href="/" className="app-name">
-        Conversine
+        ChatHub
       </a>
       <button className="home">
         {/* icon from heroicons.com */}
