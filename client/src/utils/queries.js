@@ -15,10 +15,6 @@ export const GET_MESSAGES = gql`
     getMessages(conversation: $conversationId) {
       _id
       content
-      sender {
-        _id
-        username
-      }
       createdAt
     }
   }
@@ -45,3 +41,8 @@ export const GET_CONVERSATIONS = gql`
     }
   }
 `;
+
+// sender {
+//   _id
+//   username
+// }
