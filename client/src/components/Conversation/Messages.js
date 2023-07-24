@@ -21,8 +21,8 @@ function Messages({ conversationId }) {
         {data.getMessages.map((message) => (
           <div key={message._id}>
             <p>{message.content}</p>
-            <p>Sender:{message.sender.username}</p>
-            <p>{message.createdAt}</p>
+            {/* <p>Sender:{message.sender.username}</p> */}
+            {/* <p>{message.createdAt}</p> */}
           </div>
         ))}
       </div>
