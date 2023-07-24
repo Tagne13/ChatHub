@@ -24,7 +24,7 @@
 
   ![Screenshot Here](assets/Screenshot.png)
 
-  [Heroku Link Here](https://https://tagne13-chat-app-674e8ae58fd4.herokuapp.com/)
+  [Heroku Link Here](https://tagne13-chat-app-674e8ae58fd4.herokuapp.com/)
 
 
   ## [License](#table-of-contents)
