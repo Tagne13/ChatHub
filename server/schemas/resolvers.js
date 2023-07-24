@@ -12,22 +12,25 @@ const resolvers = {
         throw new Error("Couldn't find user with this id!");
       }
     },
-    getConversation: async (parent, { _id }) => {
-      try {
-        const conversation = await Conversation.findById(_id).populate(
-          "participants"
-        );
-        return conversation;
-      } catch (err) {
-        // throw new Error("Couldn't find conversation with this id!");
-        return err;
-      }
+    // getConversation: async (parent, { _id }) => {
+    //   try {
+    //     const conversation = await Conversation.findById(_id).populate(
+    //       "participants"
+    //     );
+    //     return conversation;
+    //   } catch (err) {
+    //     // throw new Error("Couldn't find conversation with this id!");
+    //     return err;
+    //   }
+    // },
+    getConversations: async () => {
+      return Conversation.find({});
     },
     getMessages: async (parent, { conversation }) => {
       try {
-        const messages = await Message.find({ conversation }).populate(
-          "sender"
-        );
+        const messages = await Message.find({
+          conversation: conversation,
+        }).populate("sender");
         return messages;
       } catch (err) {
         throw new Error("Couldn't find messages for this conversation!");
@@ -113,23 +116,29 @@ const resolvers = {
       throw new AuthenticationError("User is not logged in");
     }, // priority, also involves socketIO
     createMessage: async (parent, args, context) => {
-      if (context.user) {
-        const message = await Message.create(args);
+      console.log(args);
+      // if (context.user) {
+      const message = await Message.create({
+        content: args.content,
+        sender: args.sender,
+        conversation: args.conversation,
+      });
+      console.log(message);
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { conversations: conversation } },
-          { new: true }
-        );
+      await User.findOneAndUpdate(
+        { _id: args.sender },
+        { $addToSet: { conversations: args.conversation } },
+        { new: true }
+      );
 
-        await Conversation.findOneAndUpdate(
-          { _id: "64b9e4c3a275f5bedc3f5167" },
-          { $addToSet: { messages: message } },
-          { new: true }
-        );
+      await Conversation.findOneAndUpdate(
+        { _id: args.conversation },
+        { $addToSet: { messages: message } },
+        { new: true }
+      );
 
-        return message;
-      }
+      return message;
+      // }
     }, // second-tier priority, messages can be stored as history for a user, check socketIO examples on this, maybe not the most necessary ?
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
