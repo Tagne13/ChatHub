@@ -30,7 +30,7 @@ const resolvers = {
       try {
         const messages = await Message.find({
           conversation: conversation,
-        }).populate("sender");
+        });
         return messages;
       } catch (err) {
         throw new Error("Couldn't find messages for this conversation!");
