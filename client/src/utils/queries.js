@@ -12,7 +12,7 @@ export const GET_USER = gql`
 
 export const GET_MESSAGES = gql`
   query getMessages($conversationId: ID!) {
-    messages(conversationId: $conversationId) {
+    getMessages(conversation: $conversationId) {
       _id
       content
       sender {
@@ -24,15 +24,24 @@ export const GET_MESSAGES = gql`
   }
 `;
 
+// export const GET_CONVERSATION = gql`
+//   query getConversation($userId: ID!) {
+//     conversation(userId: $userId) {
+//       _id
+//       name
+//       participants {
+//         _id
+//         username
+//       }
+//     }
+//   }
+// `;
+
 export const GET_CONVERSATIONS = gql`
-  query getConversation($userId: ID!) {
-    conversation(userId: $userId) {
+  query getConversations {
+    getConversations {
       _id
       name
-      participants {
-        _id
-        username
-      }
     }
   }
 `;
