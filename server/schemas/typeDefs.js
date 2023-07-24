@@ -14,7 +14,7 @@ const typeDefs = gql`
     _id: ID!
     content: String!
     sender: User!
-    conversation: Conversation!
+    conversation: ID!
     createdAt: String!
   }
 
