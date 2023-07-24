@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Messages from "./Conversation/Messages";
 import MessageInput from "./Conversation/MessageInput";
 // import Navbar from "./Conversation/Navbar";
@@ -9,6 +9,8 @@ import Auth from "../utils/auth";
 // Query the conversation.
 
 function Conversation() {
+  const [shouldRefetchMessages, setShouldRefetchMessages] = useState(false);
+
   if (Auth.loggedIn()) {
   }
   const user = Auth.getProfile();
@@ -22,13 +24,25 @@ function Conversation() {
     return <p>Error fetching: {error.message}</p>;
   }
 
+  const refetchMessages = () => {
+    setShouldRefetchMessages(true);
+  };
+
+  const toggleRefetch = () => {
+    setShouldRefetchMessages(false);
+  };
+
   return (
     <>
       {/* <Navbar /> */}
-      <Messages conversationId={data.getConversations[0]._id} />
+      <Messages
+        conversationId={data.getConversations[0]._id}
+        shouldRefetchMessages={shouldRefetchMessages}
+        setShouldRefetchMessages={toggleRefetch}
+      />
       <MessageInput
         conversationId={data.getConversations[0]._id}
-        senderId={user.data._id}
+        refetchMessages={refetchMessages}
       />
     </>
   );

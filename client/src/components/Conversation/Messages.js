@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { GET_MESSAGES } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
-function Messages({ conversationId }) {
-  const { loading, data, error } = useQuery(GET_MESSAGES, {
+function Messages({
+  conversationId,
+  shouldRefetchMessages,
+  setShouldRefetchMessages,
+}) {
+  const { loading, data, error, refetch } = useQuery(GET_MESSAGES, {
     variables: { conversationId },
   });
 
@@ -15,6 +19,10 @@ function Messages({ conversationId }) {
     return <p>Error fetching messages: {error.message}</p>;
   }
 
+  if (shouldRefetchMessages) {
+    refetch();
+    setShouldRefetchMessages();
+  }
   return (
     <>
       <div>
