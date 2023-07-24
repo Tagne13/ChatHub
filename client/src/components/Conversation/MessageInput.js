@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_MESSAGE } from "../../utils/mutations";
 
 // need to figure out how to send the senderId as a prop to this component.
-function MessageInput(senderId, conversationID) {
+function MessageInput({ conversationId, refetchMessages }) {
   const [content, setContent] = useState("");
   const [addMessage, { loading, error }] = useMutation(ADD_MESSAGE);
 
@@ -12,13 +12,16 @@ function MessageInput(senderId, conversationID) {
 
     try {
       const { data } = await addMessage({
-        variables: { content, sender: senderId, conversation: conversationID },
+        variables: {
+          content: content,
+          conversation: conversationId,
+        },
       });
-      // Think we will have to hard code this conversationID, since we will only have one.
 
       console.log("Message created:", data.createMessage);
 
       setContent("");
+      refetchMessages();
     } catch (error) {
       console.error("Error creating message:", error);
     }

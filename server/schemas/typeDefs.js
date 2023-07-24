@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -14,6 +14,7 @@ const typeDefs = gql`
     _id: ID!
     content: String!
     sender: User!
+    conversation: ID!
     createdAt: String!
   }
 
@@ -32,7 +33,7 @@ const typeDefs = gql`
 
   type Query {
     getUser(_id: ID!): User
-    getConversation(_id: ID!): Conversation
+    getConversations: [Conversation]
     getMessages(conversation: ID!): [Message!]!
   }
 
@@ -41,11 +42,15 @@ const typeDefs = gql`
     updateUser(username: String, email: String, password: String): User
     deleteUser(_id: ID!): User
     createConversation(name: String!, participants: [ID!]!): Conversation
-    updateConversation(_id: ID!, name: String, participants: [ID!]): Conversation
+    updateConversation(
+      _id: ID!
+      name: String
+      participants: [ID!]
+    ): Conversation
     deleteConversation(_id: ID!): Conversation
     addUserToConversation(_id: ID!, user: ID!): Conversation
     removeUserFromConversation(_id: ID!, user: ID!): Conversation
-    createMessage(content: String!, sender: ID!, conversation: ID!): Message
+    createMessage(content: String!, conversation: ID!): Message
     login(email: String!, password: String!): Auth
   }
 

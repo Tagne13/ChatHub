@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_USER = gql`
   query getUser($userId: ID!) {
@@ -12,27 +12,37 @@ export const GET_USER = gql`
 
 export const GET_MESSAGES = gql`
   query getMessages($conversationId: ID!) {
-    messages(conversationId: $conversationId) {
+    getMessages(conversation: $conversationId) {
       _id
       content
-      sender {
-        _id
-        username
-      }
       createdAt
     }
   }
 `;
 
+// export const GET_CONVERSATION = gql`
+//   query getConversation($userId: ID!) {
+//     conversation(userId: $userId) {
+//       _id
+//       name
+//       participants {
+//         _id
+//         username
+//       }
+//     }
+//   }
+// `;
+
 export const GET_CONVERSATIONS = gql`
-  query getConversations($userId: ID!) {
-    conversations(userId: $userId) {
+  query getConversations {
+    getConversations {
       _id
       name
-      participants {
-        _id
-        username
-      }
     }
   }
 `;
+
+// sender {
+//   _id
+//   username
+// }
