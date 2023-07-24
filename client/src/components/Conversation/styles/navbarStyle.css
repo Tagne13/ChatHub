@@ -1,0 +1,118 @@
+.navbar{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0.5rem 0rem;
+    background-color: black;
+    color: violet;
+    box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
+  }
+
+  .app-name {
+    text-decoration: none;
+    color: violet;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+  }
+  .navbar-menu {
+    margin-left: auto;
+  }
+
+  .navbar-menu ul {
+    display: flex;
+    padding: 0;
+  }
+  .navbar-menu li {
+    list-style-type: none;
+    margin: 0 1rem;
+  }
+  .navbar-menu li a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+  }
+
+  .home {
+    border: 0;
+    height: 40px;
+    width: 40px;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background-color: #283b8b;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+    display: none;
+  }
+  .notification {
+    background-color: black;
+    color: violet;
+    text-decoration: none;
+    position: relative;
+    display: none;
+    border-radius: 2px;
+  }
+  
+  .notification:hover {
+    background: white;
+  }
+  
+  .notification .badge {
+    position: absolute;
+    top: -10px;
+    padding: 1px 4px;
+    border-radius: 50%;
+    background-color: violet;
+    color: white;
+  }
+  .home:hover {
+    color: white;
+  }
+
+  @media screen and (max-width: 768px) {
+    .home {
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .navbar-menu ul {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .navbar-menu ul {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      flex-direction: column;
+      width: 100%;
+      height: calc(100vh - 77px);
+      background-color: white;
+      border-top: 1px solid black;
+    }
+    .navbar-menu li {
+      text-align: center;
+      margin: 0;
+    }
+    .navbar-menu li a {
+      color: black;
+      width: 100%;
+      padding: 1.5rem 0;
+    }
+    .navbar-menu li:hover {
+      background-color: #eee;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .navbar-menu.expanded ul {
+      display: block;
+    }
+  }

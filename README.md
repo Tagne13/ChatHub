@@ -1,4 +1,4 @@
-# working-title-proj3
+# ChatHub
 
   ![License](https://img.shields.io/badge/License-MIT-blue.svg)
     
@@ -22,7 +22,7 @@
 
   ## [Usage](#table-of-contents)
 
-  ![Screenshot Here](images/Screenshot.png)
+  ![Screenshot Here](assets/Screenshot.png)
 
   [Heroku Link Here](https://https://tagne13-chat-app-674e8ae58fd4.herokuapp.com/)
 
@@ -35,7 +35,7 @@
     
   ## [Contributing](#table-of-contents)
 
-  Eric Pertain, Eric Tranchell, Hank Richter, Jeff Montagne, and Trezz Tillman all contributed to the development of this project.
+  Eric Partain, Eric Tranchell, Hank Richter, Jeff Montagne, and Trezz Tillman all contributed to the development of this project.
 
   Special contribution credited to Kartik Jevaji, TA in MSU Coding Bootcamp, for assistance with debugging and general guidance.
 
@@ -47,6 +47,6 @@
 
   Please contact with questions using the following links:
 
-  [Jeff Montagne](https://github.com/Tagne13) [Hank Richter](https://github.com/HankRichter) [Eric Tranchell](https://github.com/etranchell) [Trezz Tillman](https://github.com/TuddaT0224) [Eric Pertain](https://github.com/KnightHawk1090)
+  [Jeff Montagne](https://github.com/Tagne13), [Hank Richter](https://github.com/HankRichter), [Eric Tranchell](https://github.com/etranchell), [Trezz Tillman](https://github.com/TuddaT0224), [Eric Partain](https://github.com/KnightHawk1090)
 
   [Email: Tagne13@gmail.com](mailto:Tagne13@gmail.com), [hankrichter97@gmail.com](mailto:hankrichter97@gmail.com), [erictranchell@yahoo.com](mailto:erictranchell@yahoo.com), [Trezzt0224@gmail.com](mailto:Trezzt0224@gmail.com), [eric.partain@yahoo.com](mailto:eric.partain@yahoo.com)
