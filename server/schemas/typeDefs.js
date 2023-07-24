@@ -33,7 +33,7 @@ const typeDefs = gql`
 
   type Query {
     getUser(_id: ID!): User
-    getConversation(_id: ID!): Conversation
+    getConversations: [Conversation]
     getMessages(conversation: ID!): [Message!]!
   }
 
