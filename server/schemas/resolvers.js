@@ -120,16 +120,9 @@ const resolvers = {
       // if (context.user) {
       const message = await Message.create({
         content: args.content,
-        sender: args.sender,
         conversation: args.conversation,
       });
       console.log(message);
-
-      await User.findOneAndUpdate(
-        { _id: args.sender },
-        { $addToSet: { conversations: args.conversation } },
-        { new: true }
-      );
 
       await Conversation.findOneAndUpdate(
         { _id: args.conversation },

@@ -50,7 +50,7 @@ const typeDefs = gql`
     deleteConversation(_id: ID!): Conversation
     addUserToConversation(_id: ID!, user: ID!): Conversation
     removeUserFromConversation(_id: ID!, user: ID!): Conversation
-    createMessage(content: String!, sender: ID!, conversation: ID!): Message
+    createMessage(content: String!, conversation: ID!): Message
     login(email: String!, password: String!): Auth
   }
 
