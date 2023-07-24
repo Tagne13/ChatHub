@@ -3,8 +3,7 @@ const { Schema, model } = require('mongoose');
 const conversationSchema = new Schema({
     name: {
         type: String,
-        required: true,
-        unique: true,
+        required: true, 
     },
     participants: [{
         type: Schema.Types.ObjectId,
